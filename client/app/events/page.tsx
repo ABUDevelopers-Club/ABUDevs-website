@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, MapPin, Users, ArrowLeft } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import SubPageHeader from "@/components/page-parts/subPageHeader"
 
 // Mock data for events
 const upcomingEvents = [
@@ -133,46 +134,7 @@ export default function EventsPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-white">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-3">
-              <ArrowLeft className="h-5 w-5 text-gray-600" />
-              <Image
-                src="/images/abudevs-logo.png"
-                alt="ABUDevs Logo"
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <div>
-                <h1 className="text-lg font-bold text-green-800">ABUDevs</h1>
-                <p className="text-sm text-gray-600">Events & Activities</p>
-              </div>
-            </Link>
-            <div className="hidden md:flex items-center space-x-6">
-              <Link href="/" className="text-gray-600 hover:text-green-700">
-                Home
-              </Link>
-              <Link href="/about" className="text-gray-600 hover:text-green-700">
-                About
-              </Link>
-              <Link href="/events" className="text-green-700 hover:text-green-900 font-medium">
-                Events
-              </Link>
-              <Link href="/blogs" className="text-gray-600 hover:text-green-700">
-                Blogs
-              </Link>
-              <Link href="/team" className="text-gray-600 hover:text-green-700">
-                Team
-              </Link>
-              <Link href="/register" className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-                Join Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
+      <SubPageHeader pageIndex={2} />
 
       <div className="container mx-auto px-4 py-12">
         {/* Page Header */}

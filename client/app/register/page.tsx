@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
-import { ArrowLeft, Users, CheckCircle } from "lucide-react"
+import { ArrowLeft, CheckCircle, CircleUserRound } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -122,14 +122,14 @@ export default function RegisterPage() {
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 pb-12 pt-5">
         <div className="max-w-2xl mx-auto">
           {/* Registration Header */}
           <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Users className="h-8 w-8 text-green-600" />
+            <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
+              <CircleUserRound className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Join ABUDevs</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Join ABUDevs</h1>
             <p className="text-gray-600 leading-relaxed">
               Become part of Ahmadu Bello University's premier tech community. Membership is completely free and open to
               all ABU students regardless of department, level, or tech experience.
@@ -137,12 +137,12 @@ export default function RegisterPage() {
           </div>
 
           {/* Registration Form */}
-          <Card className="border-green-200 shadow-lg">
-            <CardHeader className="bg-green-50">
-              <CardTitle className="text-green-800">Membership Registration</CardTitle>
-              <CardDescription>Fill out the form below to join our community of 500+ active members</CardDescription>
+          <Card className="border-green-600 shadow-lg">
+            <CardHeader className="bg-green-600 text-white p-6">
+              <CardTitle className="">Membership Registration</CardTitle>
+              <CardDescription className="text-white">Fill out the form below to join our community of 500+ active members</CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Personal Information Section */}
                 <div className="grid md:grid-cols-2 gap-4">

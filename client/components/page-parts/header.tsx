@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header:React.FC = () => {
   return (
       <header className="bg-transparent md:backdrop-blur-0 backdrop-blur-sm md:block hidden absolute top-0 left-0 right-0 z-50">
-        <div className="container mx-auto px-4 py-3">
+        <div className="container mx-auto pl-4 pr-7 py-7">
           <nav className="flex flex-row items-center justify-between">
             {/* Logo and Club Name */}
             <div className="flex items-center space-x-3">

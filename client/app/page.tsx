@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, Lightbulb, Heart, Globe } from "lucide-react"
+import { Users, Lightbulb, Heart, Globe, Cpu, CalendarCheck, GraduationCap, Radio, Blocks } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import HeroSection from "@/components/page-parts/heroSection"
@@ -33,7 +33,7 @@ export default function HomePage() {
         - Join Us button for member registration
       */}
       <Header/>
-      <MobileHeader/>
+      <MobileHeader pageIndex={0}/>
 
       {/* 
         Hero Section
@@ -53,15 +53,15 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Mission Card */}
-            <Card className="border-green-200 shadow-lg">
-              <CardHeader className="bg-green-50">
-                <CardTitle className="text-green-800 font-bold flex items-center gap-2">
+            <Card className="border-green-600 shadow-lg">
+              <CardHeader className="bg-green-600">
+                <CardTitle className="text-white font-bold flex items-center gap-2">
                   <Lightbulb className="h-6 w-6" />
                   Our Mission
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-6">
-                <p className="text-gray-700 leading-relaxed">
+              <CardContent className="pt-4">
+                <p className="text-gray-700 text-center leading-relaxed">
                   To propagate and nurture creativity and innovation amongst the students of Ahmadu Bello University,
                   Zaria, building a community of tech enthusiasts, non-techies, beginners, and experts who are
                   passionate about learning, innovating, and growing together.
@@ -70,15 +70,15 @@ export default function HomePage() {
             </Card>
 
             {/* Vision Card */}
-            <Card className="border-green-200 shadow-lg">
-              <CardHeader className="bg-green-50">
-                <CardTitle className="text-green-800 font-bold flex items-center gap-2">
+            <Card className="border-green-600 shadow-lg">
+              <CardHeader className="bg-green-600">
+                <CardTitle className="text-white font-bold flex items-center gap-2">
                   <Globe className="h-6 w-6" />
                   Our Vision
                 </CardTitle>
               </CardHeader>
-              <CardContent className="pt-6">
-                <p className="text-gray-700 leading-relaxed">
+              <CardContent className="pt-4">
+                <p className="text-gray-700 text-center leading-relaxed">
                   To be technological catalysts in Ahmadu Bello University, enabling ICT proficient students who would
                   be more than just observers of technological development, and the leading tech community in ABU and
                   beyond.
@@ -95,12 +95,12 @@ export default function HomePage() {
         - Icon-based visual design
         - Consistent card structure
       */}
-      <section className="py-16 bg-green-50">
+      <section className="pt-7 pb-10 bg-gradient-to-t from-green-200 to-white">
         <div className="container mx-auto px-4">
           {/* Section Header */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Core Values</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-9">
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Our Core Values</h2>
+            <p className="text-gray-700 max-w-2xl mx-auto">
               The principles that guide our community and drive our mission forward
             </p>
           </div>
@@ -108,12 +108,13 @@ export default function HomePage() {
           {/* Values Grid */}
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Innovation Value */}
-            <Card className="text-center border-green-200 shadow-lg">
+            <Card className="text-center border-transparent shadow-xl shadow-black/20">
               <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                  <Lightbulb className="h-8 w-8 text-green-600" />
+                <div className="mx-auto w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-4">
+                  <Cpu className="h-8 w-8 text-white" />
+          
                 </div>
-                <CardTitle className="text-green-800">Innovation</CardTitle>
+                <CardTitle className="text-green-600">Innovation</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
@@ -124,12 +125,12 @@ export default function HomePage() {
             </Card>
 
             {/* Collaboration Value */}
-            <Card className="text-center border-green-200 shadow-lg">
+            <Card className="text-center border-transparent shadow-xl shadow-black/20">
               <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                  <Users className="h-8 w-8 text-green-600" />
+                <div className="mx-auto w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-4">
+                  <Users className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-green-800">Collaboration</CardTitle>
+                <CardTitle className="text-green-600">Collaboration</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
@@ -140,12 +141,12 @@ export default function HomePage() {
             </Card>
 
             {/* Inclusivity Value */}
-            <Card className="text-center border-green-200 shadow-lg">
+            <Card className="text-center border-transparent shadow-xl shadow-black/20">
               <CardHeader>
-                <div className="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                  <Heart className="h-8 w-8 text-green-600" />
+                <div className="mx-auto w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-4">
+                  <Heart className="h-8 w-8 text-white" />
                 </div>
-                <CardTitle className="text-green-800">Inclusivity</CardTitle>
+                <CardTitle className="text-green-600">Inclusivity</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-700">
@@ -166,8 +167,8 @@ export default function HomePage() {
       */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Club Activities</h2>
+          <div className="text-center mb-9">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Club Activities</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Diverse programs designed to enhance your technical skills and foster innovation
             </p>
@@ -188,10 +189,10 @@ export default function HomePage() {
               "Conferences",
               "Open Source Contributions",
             ].map((activity, index) => (
-              <Card key={index} className="border-green-200 hover:shadow-lg transition-shadow">
+              <Card key={index} className="border-green-600 hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500"></div>
                     <span className="font-medium text-gray-800">{activity}</span>
                   </div>
                 </CardContent>
@@ -207,38 +208,42 @@ export default function HomePage() {
         - Four-column grid layout
         - Prominent numbers with descriptions
       */}
-      <section className="py-16 bg-green-50">
+      <section className="py-16 bg-gradient-to-b from-green-300 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Achievements</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-9">
+            <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Our Achievements</h2>
+            <p className="text-gray-700 max-w-2xl mx-auto">
               Making significant strides in building a vibrant tech community at ABU
             </p>
           </div>
 
           {/* Achievement Statistics Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <Card className="text-center border-green-200 shadow-lg">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-green-600 mb-2">4000+</div>
+            <Card className="text-center shadow-black/20 shadow-xl">
+              <CardContent className="p-6 flex flex-col justify-center items-center">
+                <GraduationCap className="h-8 w-8 text-green-600 mb-2" />
+                <div className="text-2xl font-extrabold text-green-600 mb-2">4000+</div>
                 <p className="text-gray-700">Students Trained</p>
               </CardContent>
             </Card>
-            <Card className="text-center border-green-200 shadow-lg">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-green-600 mb-2">80+</div>
+            <Card className="text-center shadow-black/20 shadow-xl">
+              <CardContent className="p-6 flex flex-col justify-center items-center">
+                <Radio className="h-8 w-8 text-green-600 mb-2" />
+                <div className="text-2xl font-extrabold text-green-600 mb-2">80+</div>
                 <p className="text-gray-700">Online Events</p>
               </CardContent>
             </Card>
-            <Card className="text-center border-green-200 shadow-lg">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-green-600 mb-2">60+</div>
+            <Card className="text-center shadow-black/20 shadow-xl">
+              <CardContent className="p-6 flex flex-col justify-center items-center">
+                <CalendarCheck className="h-8 w-8 text-green-600 mb-2" />
+                <div className="text-2xl font-extrabold text-green-600 mb-2">60+</div>
                 <p className="text-gray-700">Physical Events</p>
               </CardContent>
             </Card>
-            <Card className="text-center border-green-200 shadow-lg">
-              <CardContent className="p-6">
-                <div className="text-3xl font-bold text-green-600 mb-2">30+</div>
+            <Card className="text-center shadow-black/20 shadow-xl">
+              <CardContent className="p-6 flex flex-col justify-center items-center">
+                <Blocks className="h-8 w-8 text-green-600 mb-2" />
+                <div className="text-2xl font-extrabold text-green-600 mb-2">30+</div>
                 <p className="text-gray-700">Startups Launched</p>
               </CardContent>
             </Card>

@@ -57,7 +57,7 @@ const HeroSection: React.FC = () => {
 
           <h1 style={{lineHeight:'27px'}} className="text-xl md:text-2xl font-extrabold mb-3">
             Ahmadu Bello University
-            <span className="block text-transparent bg-clip-text bg-gradient-to-br from-green-400 to-green-950">Developers Club</span>
+            <span className="block text-green-600">Developers Club</span>
           </h1>
 
           <p className="md:text-6xl text-5xl mb-8 md:leading-[60px] font-extrabold leading-[50px]">
@@ -65,7 +65,7 @@ const HeroSection: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-start">
-            <Button asChild size="xl" className="bg-gradient-to-b from-green-500 transition-all ease-in-out duration-300 to-green-950 text-[19px] font-extrabold   hover:scale-[104%]">
+            <Button asChild size="xl" className="bg-green-600 transition-all ease-in-out duration-300 text-[19px] font-extrabold  hover:scale-[104%]">
               <Link href="/register">Become a Member</Link>
             </Button>
             <Button
