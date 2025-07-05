@@ -1,33 +1,22 @@
 "use client"
 
-import type React from "react"
+import type React from "react";
+import axios from "axios";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Checkbox } from "@/components/ui/checkbox"
-import { ArrowLeft, CheckCircle, CircleUserRound } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ArrowLeft, CheckCircle, CircleUserRound, Loader } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { is } from "date-fns/locale";
+import ErrorCard from "@/components/ui/ErrorCard";
 
-/**
- * RegisterPage Component
- *
- * This component handles member registration for ABUDevs.
- * Features:
- * - Multi-step form with validation
- * - Success state after submission
- * - Form state management with React hooks
- * - Responsive design
- *
- * TODO: Connect to backend API for form submission
- * TODO: Add form validation
- * TODO: Add email confirmation flow
- */
 export default function RegisterPage() {
   // Form state management
   const [formData, setFormData] = useState({
@@ -44,39 +33,87 @@ export default function RegisterPage() {
     agreeToTerms: false,
   })
 
+  const [ isProcessing, setIsProcessing ] = useState(false);
+  // Processing state for form submission
+
   // Success state for showing confirmation
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  /**
-   * Handle form submission
-   * Currently logs to console - needs backend integration
-   *
-   * @param e - Form event
-   */
-  const handleSubmit = (e: React.FormEvent) => {
+  // Error state for handling errors
+  const [ processError, setProcessError] = useState<string | null>(null);
+  const [ showError, setShowError ] = useState(false);
+  const [ memberId, setMemberId ] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const data = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      phone_number: formData.phone,
+      student_id: formData.studentId,
+      department: formData.department,
+      current_level: formData.level,
+      tech_experience_level: formData.techExperience,
+      area_of_interest: formData.interests,
+      reason_for_joining: formData.motivation
+    }
 
-    // TODO: Replace with actual API call
-    // Example: await fetch('/api/register', { method: 'POST', body: JSON.stringify(formData) })
-    console.log("Registration data:", formData)
+    try {
+      setIsProcessing(true);
+      // Make API request to register the student
+      const response = await axios.post("https://abudevs-website-api.onrender.com/students/register", data);
+      if (response.status === 200 || response.status === 201) {
+        setMemberId(response.data?.student?.abudevs_id);
+        // Show success state
+        console.log("Registration successful:", response.data);
+        setIsProcessing(false);
+        setIsSubmitted(true);
+      } else {
+        // Log the error or show a message to the user
+        console.error("Registration failed with status:", response.status);
+        handleError(`Registration failed with status: ${response.status}`);
+        return
+      }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        // Axios-specific error
+        console.error("Registration failed:", error?.message);
+        handleError(`Registration failed: ${error?.response?.data?.error ?? "Unknown server error"}`);
+      } else if (error instanceof Error) {
+        // General JS error
+        console.error("Registration failed:", error?.message);
+        handleError(`Registration failed: ${error?.message}`);
+      } else {
+        // Unknown error type
+        console.error("Registration failed with an unknown error:", error);
+        handleError("Registration failed: An unexpected error occurred.");
+      }
+    }
 
-    // Show success state
-    setIsSubmitted(true)
   }
 
-  /**
-   * Handle input changes
-   * Updates form state for controlled components
-   *
-   * @param field - Form field name
-   * @param value - New value
-   */
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  }
+
+  const handleError = (error: string) => {
+    // Handle error state, e.g., show an error message
+    console.error("Error:", error);
+    setProcessError(error);
+    setIsProcessing(false);
+    setIsSubmitted(false);
+    setShowError(true); // Show the error state in the UI
+
+    setTimeout(() => {
+      setShowError(false); // Hide the error after a delay
+    }, 5000); 
+
+    document.documentElement.scrollTop = 0; // Scroll to top on error
   }
 
   // Success state UI
-  if (isSubmitted) {
+  if (isSubmitted && !isProcessing) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-white flex items-center justify-center p-4">
         <Card className="max-w-md w-full text-center">
@@ -84,11 +121,23 @@ export default function RegisterPage() {
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="h-8 w-8 text-green-600" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Registration Successful!</h2>
-            <p className="text-gray-600 mb-6">
-              Welcome to ABUDevs! We'll be in touch soon with more information about upcoming events and activities.
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Registration Successful!</h2>
+            <p className="text-gray-600 mb-4">
+              Welcome to the ABU Developers Club, <strong>{formData.firstName}</strong>! Your membership has been successfully created.
             </p>
-            <Button asChild className="bg-green-600 hover:bg-green-700">
+            <div className="flex flex-col text-start border-[0.5px] bg-blue-50 border-blue-300 py-3 px-2 justify-start items-start">
+                <span><span className="font-semibold text-blue-800">🆔 Membership ID</span>: {memberId}</span>
+                <span className="text-[10px] text-gray-600">(Please keep this ID safe — you&nbsp;ll need it for all club activities and identification.)</span>
+            </div>
+            <CardContent className="p-2 mt-3 text-start">
+              <h3 className="font-semibold text-green-800 mb-2">What happens next?</h3>
+              <ul className="text-green-700 space-y-1 text-sm">
+                <li>• Access to our WhatsApp and Telegram groups</li>
+                <li>• Follow us on instagram: <Link className="underline text-blue-600" href="https://www.instagram.com/abudevs_?igsh=ZjJtZ2xyNGtyNm9u">@abudevs_</Link></li>
+                <li>• Click here to check upcoming events: <Link className="underline text-blue-500" href={"/events"}>See events</Link></li>
+              </ul>
+            </CardContent>
+            <Button asChild className="bg-green-600 mt-4 hover:bg-green-700">
               <Link href="/">Return to Home</Link>
             </Button>
           </CardContent>
@@ -144,6 +193,9 @@ export default function RegisterPage() {
             </CardHeader>
             <CardContent className="p-4">
               <form onSubmit={handleSubmit} className="space-y-6">
+                { showError && processError ? (
+                  <ErrorCard error={processError} />
+                ) : null }
                 {/* Personal Information Section */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
@@ -300,7 +352,17 @@ export default function RegisterPage() {
                   className="w-full bg-green-600 hover:bg-green-700"
                   disabled={!formData.agreeToTerms}
                 >
-                  Complete Registration
+                  { isProcessing ? (
+                    <span className="flex items-center justify-center space-x-2">
+                      <Loader className="h-4 w-4 text-white animate-spin" />
+                      <span>Processing...</span>
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center space-x-2">
+                      <CheckCircle strokeWidth={1} className="h-4 text-white w-4" />
+                      <span>Complete Registration</span>
+                    </span>
+                  )}
                 </Button>
               </form>
             </CardContent>
